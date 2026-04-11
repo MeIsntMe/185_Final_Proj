@@ -16,6 +16,23 @@ def compute_per_token_logprobs(
         # TODO(student): run the causal LM, align logits with the next-token targets,
         # and return per-token log-probabilities of the observed tokens.
         # Hint: use F.cross_entropy with reduction='none' for memory efficiency.
+        out = model(
+            input_ids=input_ids,
+            attention_mask=attention_mask,
+            use_cache=False,
+        )
+        logits = out.logits[:, :-1, :]
+        labels = input_ids[:, 1:]
+
+        B, L, V = logits.shape #Note: L = L-1
+
+        logits = logits.reshape(B*L, V)
+        labels = labels.reshape(B*L)
+
+        logprob = F.cross_entropy(logits, labels, reduction="none")
+
+        logprobs = -logprob.reshape(B, L)    # [B, L-1]
+        return logprobs
         raise NotImplementedError("Implement compute_per_token_logprobs in the student starter.")
 
 
@@ -29,6 +46,16 @@ def build_completion_mask(
     del pad_token_id
     # TODO(student): build a float mask of shape [B, L-1] that selects only completion tokens.
     # Be careful about the one-token shift between logits[:, :-1] and input_ids[:, 1:].
+    B, L = input_ids.shape
+
+    t = torch.arange(L - 1, device=input_ids.device)
+    mask = t >= (prompt_input_len - 1)
+    mask = mask.unsqueeze(0).expand(B, -1)
+
+    mask = mask & attention_mask[:, 1:]
+
+    return mask.float()
+
     raise NotImplementedError("Implement build_completion_mask in the student starter.")
 
 
@@ -58,4 +85,9 @@ def approx_kl_from_logprobs(
     del eps, log_ratio_clip
     # TODO(student): implement the sampled-token KL proxy used throughout the codebase.
     # You should mask out non-completion positions and return a scalar batch mean.
+    delta = (ref_logprobs - new_logprobs).clamp(-log_ratio_clip, log_ratio_clip)
+    per_token = delta.exp() - delta - 1.0
+
+    mask = mask.to(dtype=per_token.dtype)
+    return masked_mean(per_token, mask)
     raise NotImplementedError("Implement approx_kl_from_logprobs in the student starter.")
