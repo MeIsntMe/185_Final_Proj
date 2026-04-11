@@ -161,8 +161,9 @@ def _compute_pair_metrics(chosen_scores: torch.Tensor, rejected_scores: torch.Te
     #   1. the per-example margin,
     #   2. the mean negative log-sigmoid loss,
     #   3. summary metrics such as pair accuracy and mean margin.
-    margins = torch.empty_like(chosen_scores)
-    loss = torch.empty((), device=chosen_scores.device, dtype=chosen_scores.dtype)
+    margins = chosen_scores - rejected_scores # per-example margin
+    loss = -F.logsigmoid(margins).mean() # mean negative log-sigmoid loss
+
     return {
         "loss_tensor": loss,
         "reward_model/loss": float(loss.detach().item()),
