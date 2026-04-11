@@ -79,7 +79,7 @@ class DrGRPO(RLAlgorithm):
                 clipped_t = clipped_ratio * token_adv
 
                 per_token_obj = torch.minimum(unclipped_t, clipped_t) * mask
-                seq_obj = (per_token_obj * mask).sum(dim=1)
+                seq_obj = (per_token_obj).sum(dim=1)
                 pg_loss = -seq_obj.mean()
 
                 kl = approx_kl_from_logprobs(new_logp, mb.ref_logprobs, mask)
