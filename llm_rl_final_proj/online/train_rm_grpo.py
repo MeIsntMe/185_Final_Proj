@@ -222,11 +222,11 @@ def _compute_group_advantages(
     mean = rewards.mean(dim=1, keepdim=True)
 
     if divide_by_std:
-        std = rewards.std(dim=1, keepdim=True, unbiased=False)
+        std = rewards.std(dim=1, keepdim=True, unbiased=False) + eps
     else:
         std = 1.0
 
-    adv = (rewards-mean)/(std+eps)
+    adv = (rewards-mean)/std
 
     return adv.reshape(-1) #reshapes to 1D, full collapse
 
@@ -257,7 +257,7 @@ def _algo_divides_advantages_by_std(algo: str) -> bool:
     # TODO(student): return True for the algorithms that use group-standard-deviation
     # normalization and False for the algorithms that intentionally avoid it.
 
-    return algo == "grpo"
+    return algo != "dr_grpo"
 
     raise NotImplementedError("Implement _algo_divides_advantages_by_std in the student starter.")
 

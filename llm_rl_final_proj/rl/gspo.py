@@ -76,8 +76,7 @@ class GSPO(RLAlgorithm):
                 unclipped = seq_ratio * adv
                 clipped = clipped_seq_ratio * adv
 
-                per_token_obj = torch.minimum(unclipped, clipped)
-                seq_obj = masked_mean_per_row(per_token_obj, mask)
+                seq_obj = torch.minimum(unclipped, clipped)
                 pg_loss = -seq_obj.mean()
 
                 kl = approx_kl_from_logprobs(new_logp, mb.ref_logprobs, mask)
