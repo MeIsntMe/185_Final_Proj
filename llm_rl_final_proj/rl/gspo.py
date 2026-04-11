@@ -83,7 +83,7 @@ class GSPO(RLAlgorithm):
                 entropy = -masked_mean(new_logp, mask)
 
                 was_clipped = ((seq_ratio < 1.0 - cfg.clip_eps) | (seq_ratio > 1.0 + cfg.clip_eps)).float()
-                clipfrac = masked_mean(was_clipped, mask)
+                clipfrac = was_clipped.mean()
 
                 loss = (pg_loss + cfg.kl_coef * kl) / max(1, grad_accum_steps)
                 if not torch.isfinite(loss):
