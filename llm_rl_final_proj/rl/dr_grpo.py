@@ -29,7 +29,7 @@ class DrGRPO(RLAlgorithm):
         rollout: RolloutBatch,
         grad_accum_steps: int = 1,
     ) -> Dict[str, float]:
-        del model, optimizer, rollout, grad_accum_steps
+        # del model, optimizer, rollout, grad_accum_steps
         # TODO(student): implement DrGRPO.
         # Start from your GRPO implementation, then make the two intended changes:
         #   1. use the DrGRPO advantage convention (configured in online/train_rm_grpo.py),

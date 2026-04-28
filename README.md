@@ -236,6 +236,33 @@ uv run modal run scripts/modal_train.py::build_policy_submission_remote -- \
   --top_p 1.0
 ```
 
+```powershell
+uv run modal run scripts/modal_train.py::build_policy_submission_remote -- `
+  --model_name Qwen/Qwen2.5-1.5B-Instruct `
+  --adapter_path /vol/runs/<run>/checkpoints/<step>/adapter `
+  --prompts_jsonl /root/project/public_eval/public_test_gen_prompts_128.jsonl `
+  --output_jsonl /vol/submissions/dpo.jsonl `
+  --max_prompt_tokens 700 `
+  --max_new_tokens 256 `
+  --temperature 0.0 `
+  --top_p 1.0
+```
+
+uv run modal run --detach scripts/modal_train.py::build_policy_submission_remote -- `
+  --model_name Qwen/Qwen2.5-1.5B-Instruct `
+  --adapter_path /vol/runs/wildchat_min4_judged_5k_drgrpo_v1/checkpoints/step_000025/adapter `
+  --prompts_jsonl /root/project/public_eval/public_test_gen_prompts_128.jsonl `
+  --output_jsonl /vol/submissions/dpo.jsonl `
+  --max_prompt_tokens 700 `
+  --max_new_tokens 256 `
+  --temperature 0.0 `
+  --top_p 1.0
+
+wildchat_min4_judged_5k_drgrpo_v1
+wildchat_min4_judged_5k_grpo_v1
+wildchat_min4_judged_5k_gspo_v1
+step_000025
+
 Repeat this for each required Part 1 policy method, changing `--adapter_path` and `--output_jsonl` appropriately. Use the same `128`-prompt file for all six Part 1 policy submissions.
 
 ### Part 1 reward-model submission
@@ -255,6 +282,16 @@ uv run modal run scripts/modal_train.py::build_reward_model_submission_remote --
   --prefs_jsonl /root/project/public_eval/public_test_prefs_256.jsonl \
   --output_jsonl /vol/submissions/public_test_pref_scores.jsonl \
   --max_prompt_tokens 700 \
+  --max_response_tokens 512
+```
+
+```powershell
+uv run modal run scripts/modal_train.py::build_reward_model_submission_remote -- `
+  --model_name Qwen/Qwen2.5-1.5B-Instruct `
+  --adapter_path /vol/runs/<reward_model_run>/checkpoints/<step>/adapter `
+  --prefs_jsonl /root/project/public_eval/public_test_prefs_256.jsonl `
+  --output_jsonl /vol/submissions/public_test_pref_scores.jsonl `
+  --max_prompt_tokens 700 `
   --max_response_tokens 512
 ```
 

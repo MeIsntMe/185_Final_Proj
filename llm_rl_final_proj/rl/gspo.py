@@ -29,7 +29,7 @@ class GSPO(RLAlgorithm):
         rollout: RolloutBatch,
         grad_accum_steps: int = 1,
     ) -> Dict[str, float]:
-        del model, optimizer, rollout, grad_accum_steps
+        # del model, optimizer, rollout, grad_accum_steps
         # TODO(student): implement GSPO.
         # The main change relative to GRPO is that you should aggregate token log-ratios into
         # one sequence-level ratio before applying PPO-style clipping.

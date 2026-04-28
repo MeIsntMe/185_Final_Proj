@@ -49,7 +49,8 @@ def iter_minibatches(
     N = batch.input_ids.shape[0]
 
     if shuffle: 
-        indices = torch.randperm(N, generator=generator)
+        indices = torch.randperm(N).to(device)
+        # indices = torch.randperm(N, generator=generator)
     else: 
         indices = torch.arange(N)
 
@@ -72,4 +73,4 @@ def iter_minibatches(
             minibatch = minibatch.to(device=device)
 
         yield minibatch
-    raise NotImplementedError("Implement iter_minibatches in the student starter.")
+    # raise NotImplementedError("Implement iter_minibatches in the student starter.")

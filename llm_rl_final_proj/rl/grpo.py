@@ -31,7 +31,7 @@ class GRPO(RLAlgorithm):
         rollout: RolloutBatch,
         grad_accum_steps: int = 1,
     ) -> Dict[str, float]:
-        del model, optimizer, rollout, grad_accum_steps
+        # del model, optimizer, rollout, grad_accum_steps
         # TODO(student): implement one GRPO training iteration.
         # The intended structure is:
         #   1. loop over PPO epochs,
