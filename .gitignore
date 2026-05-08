@@ -1,3 +1,5 @@
 graphs/
 .venv
 wildchat_reward_model/
+submissions/
+runs/

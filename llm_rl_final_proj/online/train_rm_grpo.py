@@ -13,6 +13,8 @@ import torch
 
 from llm_rl_final_proj.data.ultrafeedback import GenerationExample, build_generation_examples, dataset_overview
 from llm_rl_final_proj.models.load import (
+    PolicyModel,
+    RewardModel,
     load_lora_policy_model_and_tokenizer,
     load_reward_model_and_tokenizer,
 )
@@ -75,7 +77,7 @@ class OnlineRMGRPOConfig:
     adv_clip: float = 5.0
 
     max_prompt_tokens: int = 700
-    max_response_tokens: int = 256
+    max_response_tokens: int = 512
     train_limit: int = 0
     eval_limit: int = 64
     reward_batch_size: int = 16
@@ -207,6 +209,7 @@ def _compute_group_advantages(
     *,
     divide_by_std: bool,
 ) -> torch.Tensor:
+    
     # TODO(student): compute one scalar advantage per sampled completion by grouping rewards
     # into prompt-wise batches of size `group_size`, subtracting the group mean, and optionally
     # dividing by the group standard deviation when `divide_by_std=True`.
@@ -229,7 +232,6 @@ def _compute_group_advantages(
     adv = (rewards-mean)/std
 
     return adv.reshape(-1) #reshapes to 1D, full collapse
-
     raise NotImplementedError("Implement _compute_group_advantages in the student starter.")
 
 
@@ -320,9 +322,9 @@ def save_checkpoint(model: torch.nn.Module, cfg: OnlineRMGRPOConfig, step: int) 
 @torch.no_grad()
 def evaluate_policy_with_reward_model(
     *,
-    policy_model: torch.nn.Module,
+    policy_model: PolicyModel,
     policy_tokenizer,
-    reward_model: torch.nn.Module,
+    reward_model: RewardModel,
     reward_tokenizer,
     examples: Sequence[GenerationExample],
     device: torch.device,

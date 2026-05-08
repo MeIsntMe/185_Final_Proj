@@ -3,9 +3,11 @@ from __future__ import annotations
 import torch
 import torch.nn.functional as F
 
+from llm_rl_final_proj.models.load import PolicyModel
+
 
 def compute_per_token_logprobs(
-    model: torch.nn.Module,
+    model: PolicyModel,
     input_ids: torch.Tensor,
     attention_mask: torch.Tensor,
     *,
@@ -43,7 +45,8 @@ def build_completion_mask(
     pad_token_id: int,
 ) -> torch.Tensor:
     """Mask over per-token positions [B, L-1], selecting completion tokens only."""
-    # del pad_token_id
+    del pad_token_id
+
     # TODO(student): build a float mask of shape [B, L-1] that selects only completion tokens.
     # Be careful about the one-token shift between logits[:, :-1] and input_ids[:, 1:].
     B, L = input_ids.shape
@@ -55,7 +58,6 @@ def build_completion_mask(
     mask = mask & attention_mask[:, 1:]
 
     return mask.float()
-
     raise NotImplementedError("Implement build_completion_mask in the student starter.")
 
 
@@ -82,8 +84,7 @@ def approx_kl_from_logprobs(
 
     Uses estimator: exp(delta) - delta - 1 where delta = log p_ref(a) - log p_new(a).
     """
-    # del eps, log_ratio_clip
-    
+    del eps
     # TODO(student): implement the sampled-token KL proxy used throughout the codebase.
     # You should mask out non-completion positions and return a scalar batch mean.
     delta = (ref_logprobs - new_logprobs).clamp(-log_ratio_clip, log_ratio_clip)

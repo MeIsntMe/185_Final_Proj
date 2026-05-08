@@ -1,0 +1,128 @@
+{"row_id": 0, "best_response": "base", "worst_response": "gspo", "usable_for_training": false, "exclusion_tags": []}
+{"row_id": 1, "best_response": "base", "worst_response": "gspo", "usable_for_training": false, "exclusion_tags": ["high_factual_uncertainty", "all_candidates_too_weak"]}
+{"row_id": 2, "best_response": "base", "worst_response": "gspo", "usable_for_training": false, "exclusion_tags": ["high_factual_uncertainty"]}
+{"row_id": 3, "best_response": "gspo", "worst_response": "base", "usable_for_training": false, "exclusion_tags": ["all_candidates_too_weak"]}
+{"row_id": 4, "best_response": "base", "worst_response": "gspo", "usable_for_training": false, "exclusion_tags": []}
+{"row_id": 5, "best_response": "base", "worst_response": "gspo", "usable_for_training": false, "exclusion_tags": []}
+{"row_id": 6, "best_response": "gspo", "worst_response": "base", "usable_for_training": false, "exclusion_tags": []}
+{"row_id": 7, "best_response": "base", "worst_response": "gspo", "usable_for_training": false, "exclusion_tags": ["all_candidates_too_weak"]}
+{"row_id": 8, "best_response": "base", "worst_response": "gspo", "usable_for_training": true, "exclusion_tags": []}
+{"row_id": 9, "best_response": "base", "worst_response": "gspo", "usable_for_training": false, "exclusion_tags": []}
+{"row_id": 10, "best_response": "base", "worst_response": "gspo", "usable_for_training": false, "exclusion_tags": []}
+{"row_id": 11, "best_response": "base", "worst_response": "gspo", "usable_for_training": false, "exclusion_tags": []}
+{"row_id": 12, "best_response": "base", "worst_response": "gspo", "usable_for_training": false, "exclusion_tags": []}
+{"row_id": 13, "best_response": "gspo", "worst_response": "base", "usable_for_training": false, "exclusion_tags": ["all_candidates_too_weak"]}
+{"row_id": 14, "best_response": "gspo", "worst_response": "base", "usable_for_training": false, "exclusion_tags": ["all_candidates_too_weak"]}
+{"row_id": 15, "best_response": "gspo", "worst_response": "base", "usable_for_training": false, "exclusion_tags": ["all_candidates_too_weak"]}
+{"row_id": 16, "best_response": "gspo", "worst_response": "base", "usable_for_training": false, "exclusion_tags": ["high_factual_uncertainty", "all_candidates_too_weak"]}
+{"row_id": 17, "best_response": "base", "worst_response": "gspo", "usable_for_training": false, "exclusion_tags": []}
+{"row_id": 18, "best_response": "base", "worst_response": "gspo", "usable_for_training": false, "exclusion_tags": ["all_candidates_too_weak"]}
+{"row_id": 19, "best_response": "gspo", "worst_response": "base", "usable_for_training": true, "exclusion_tags": []}
+{"row_id": 20, "best_response": "base", "worst_response": "gspo", "usable_for_training": false, "exclusion_tags": ["all_candidates_too_weak"]}
+{"row_id": 21, "best_response": "gspo", "worst_response": "base", "usable_for_training": true, "exclusion_tags": []}
+{"row_id": 22, "best_response": "base", "worst_response": "gspo", "usable_for_training": false, "exclusion_tags": []}
+{"row_id": 23, "best_response": "gspo", "worst_response": "base", "usable_for_training": false, "exclusion_tags": []}
+{"row_id": 24, "best_response": "base", "worst_response": "gspo", "usable_for_training": false, "exclusion_tags": ["high_factual_uncertainty", "all_candidates_too_weak"]}
+{"row_id": 25, "best_response": "base", "worst_response": "gspo", "usable_for_training": false, "exclusion_tags": ["high_factual_uncertainty"]}
+{"row_id": 26, "best_response": "base", "worst_response": "gspo", "usable_for_training": false, "exclusion_tags": []}
+{"row_id": 27, "best_response": "base", "worst_response": "gspo", "usable_for_training": false, "exclusion_tags": ["all_candidates_too_weak"]}
+{"row_id": 28, "best_response": "gspo", "worst_response": "base", "usable_for_training": false, "exclusion_tags": []}
+{"row_id": 29, "best_response": "base", "worst_response": "gspo", "usable_for_training": false, "exclusion_tags": []}
+{"row_id": 30, "best_response": "base", "worst_response": "gspo", "usable_for_training": false, "exclusion_tags": ["high_factual_uncertainty", "all_candidates_too_weak"]}
+{"row_id": 31, "best_response": "gspo", "worst_response": "base", "usable_for_training": false, "exclusion_tags": ["legal_or_financial_advice", "all_candidates_too_weak"]}
+{"row_id": 32, "best_response": "base", "worst_response": "gspo", "usable_for_training": false, "exclusion_tags": ["all_candidates_too_weak"]}
+{"row_id": 33, "best_response": "gspo", "worst_response": "base", "usable_for_training": false, "exclusion_tags": []}
+{"row_id": 34, "best_response": "base", "worst_response": "gspo", "usable_for_training": false, "exclusion_tags": ["all_candidates_too_weak"]}
+{"row_id": 35, "best_response": "gspo", "worst_response": "base", "usable_for_training": false, "exclusion_tags": ["all_candidates_too_weak"]}
+{"row_id": 36, "best_response": "gspo", "worst_response": "base", "usable_for_training": false, "exclusion_tags": ["all_candidates_too_weak"]}
+{"row_id": 37, "best_response": "gspo", "worst_response": "base", "usable_for_training": false, "exclusion_tags": []}
+{"row_id": 38, "best_response": "base", "worst_response": "gspo", "usable_for_training": true, "exclusion_tags": []}
+{"row_id": 39, "best_response": "base", "worst_response": "gspo", "usable_for_training": false, "exclusion_tags": []}
+{"row_id": 40, "best_response": "base", "worst_response": "gspo", "usable_for_training": false, "exclusion_tags": ["all_candidates_too_weak"]}
+{"row_id": 41, "best_response": "gspo", "worst_response": "base", "usable_for_training": false, "exclusion_tags": ["all_candidates_too_weak"]}
+{"row_id": 42, "best_response": "gspo", "worst_response": "base", "usable_for_training": true, "exclusion_tags": []}
+{"row_id": 43, "best_response": "base", "worst_response": "gspo", "usable_for_training": false, "exclusion_tags": []}
+{"row_id": 44, "best_response": "gspo", "worst_response": "base", "usable_for_training": false, "exclusion_tags": ["all_candidates_too_weak"]}
+{"row_id": 45, "best_response": "gspo", "worst_response": "base", "usable_for_training": true, "exclusion_tags": []}
+{"row_id": 46, "best_response": "base", "worst_response": "gspo", "usable_for_training": false, "exclusion_tags": ["all_candidates_too_weak"]}
+{"row_id": 47, "best_response": "gspo", "worst_response": "base", "usable_for_training": false, "exclusion_tags": []}
+{"row_id": 48, "best_response": "base", "worst_response": "gspo", "usable_for_training": false, "exclusion_tags": ["all_candidates_too_weak"]}
+{"row_id": 49, "best_response": "gspo", "worst_response": "base", "usable_for_training": false, "exclusion_tags": ["high_factual_uncertainty"]}
+{"row_id": 50, "best_response": "base", "worst_response": "gspo", "usable_for_training": true, "exclusion_tags": []}
+{"row_id": 51, "best_response": "base", "worst_response": "gspo", "usable_for_training": true, "exclusion_tags": []}
+{"row_id": 52, "best_response": "base", "worst_response": "gspo", "usable_for_training": false, "exclusion_tags": []}
+{"row_id": 53, "best_response": "base", "worst_response": "gspo", "usable_for_training": false, "exclusion_tags": []}
+{"row_id": 54, "best_response": "base", "worst_response": "gspo", "usable_for_training": false, "exclusion_tags": ["all_candidates_too_weak"]}
+{"row_id": 55, "best_response": "gspo", "worst_response": "base", "usable_for_training": false, "exclusion_tags": ["copyright_or_fanfic", "all_candidates_too_weak"]}
+{"row_id": 56, "best_response": "gspo", "worst_response": "base", "usable_for_training": false, "exclusion_tags": ["garbled_or_underspecified_prompt", "all_candidates_too_weak"]}
+{"row_id": 57, "best_response": "gspo", "worst_response": "base", "usable_for_training": true, "exclusion_tags": []}
+{"row_id": 58, "best_response": "base", "worst_response": "gspo", "usable_for_training": false, "exclusion_tags": []}
+{"row_id": 59, "best_response": "gspo", "worst_response": "base", "usable_for_training": true, "exclusion_tags": []}
+{"row_id": 60, "best_response": "base", "worst_response": "gspo", "usable_for_training": false, "exclusion_tags": []}
+{"row_id": 61, "best_response": "base", "worst_response": "gspo", "usable_for_training": false, "exclusion_tags": ["all_candidates_too_weak"]}
+{"row_id": 62, "best_response": "base", "worst_response": "gspo", "usable_for_training": false, "exclusion_tags": ["all_candidates_too_weak"]}
+{"row_id": 63, "best_response": "base", "worst_response": "gspo", "usable_for_training": false, "exclusion_tags": ["all_candidates_too_weak"]}
+{"row_id": 64, "best_response": "base", "worst_response": "gspo", "usable_for_training": false, "exclusion_tags": []}
+{"row_id": 65, "best_response": "base", "worst_response": "gspo", "usable_for_training": false, "exclusion_tags": []}
+{"row_id": 66, "best_response": "base", "worst_response": "gspo", "usable_for_training": false, "exclusion_tags": ["all_candidates_too_weak"]}
+{"row_id": 67, "best_response": "gspo", "worst_response": "base", "usable_for_training": false, "exclusion_tags": ["high_factual_uncertainty"]}
+{"row_id": 68, "best_response": "base", "worst_response": "gspo", "usable_for_training": false, "exclusion_tags": ["all_candidates_too_weak"]}
+{"row_id": 69, "best_response": "gspo", "worst_response": "base", "usable_for_training": false, "exclusion_tags": []}
+{"row_id": 70, "best_response": "gspo", "worst_response": "base", "usable_for_training": false, "exclusion_tags": ["all_candidates_too_weak"]}
+{"row_id": 71, "best_response": "base", "worst_response": "gspo", "usable_for_training": false, "exclusion_tags": []}
+{"row_id": 72, "best_response": "gspo", "worst_response": "base", "usable_for_training": false, "exclusion_tags": []}
+{"row_id": 73, "best_response": "gspo", "worst_response": "base", "usable_for_training": false, "exclusion_tags": ["all_candidates_too_weak"]}
+{"row_id": 74, "best_response": "base", "worst_response": "gspo", "usable_for_training": false, "exclusion_tags": []}
+{"row_id": 75, "best_response": "base", "worst_response": "gspo", "usable_for_training": false, "exclusion_tags": []}
+{"row_id": 76, "best_response": "base", "worst_response": "gspo", "usable_for_training": false, "exclusion_tags": ["high_factual_uncertainty", "all_candidates_too_weak"]}
+{"row_id": 77, "best_response": "base", "worst_response": "gspo", "usable_for_training": false, "exclusion_tags": []}
+{"row_id": 78, "best_response": "base", "worst_response": "gspo", "usable_for_training": true, "exclusion_tags": []}
+{"row_id": 79, "best_response": "gspo", "worst_response": "base", "usable_for_training": false, "exclusion_tags": ["all_candidates_too_weak"]}
+{"row_id": 80, "best_response": "gspo", "worst_response": "base", "usable_for_training": false, "exclusion_tags": ["all_candidates_too_weak"]}
+{"row_id": 81, "best_response": "base", "worst_response": "gspo", "usable_for_training": false, "exclusion_tags": []}
+{"row_id": 82, "best_response": "gspo", "worst_response": "base", "usable_for_training": true, "exclusion_tags": []}
+{"row_id": 83, "best_response": "base", "worst_response": "gspo", "usable_for_training": false, "exclusion_tags": []}
+{"row_id": 84, "best_response": "gspo", "worst_response": "base", "usable_for_training": false, "exclusion_tags": ["all_candidates_too_weak"]}
+{"row_id": 85, "best_response": "gspo", "worst_response": "base", "usable_for_training": false, "exclusion_tags": []}
+{"row_id": 86, "best_response": "gspo", "worst_response": "base", "usable_for_training": false, "exclusion_tags": []}
+{"row_id": 87, "best_response": "base", "worst_response": "gspo", "usable_for_training": false, "exclusion_tags": ["all_candidates_too_weak"]}
+{"row_id": 88, "best_response": "gspo", "worst_response": "base", "usable_for_training": false, "exclusion_tags": []}
+{"row_id": 89, "best_response": "base", "worst_response": "gspo", "usable_for_training": true, "exclusion_tags": []}
+{"row_id": 90, "best_response": "gspo", "worst_response": "base", "usable_for_training": false, "exclusion_tags": ["all_candidates_too_weak"]}
+{"row_id": 91, "best_response": "gspo", "worst_response": "base", "usable_for_training": false, "exclusion_tags": ["high_factual_uncertainty"]}
+{"row_id": 92, "best_response": "gspo", "worst_response": "base", "usable_for_training": true, "exclusion_tags": []}
+{"row_id": 93, "best_response": "gspo", "worst_response": "base", "usable_for_training": false, "exclusion_tags": ["high_factual_uncertainty", "all_candidates_too_weak"]}
+{"row_id": 94, "best_response": "gspo", "worst_response": "base", "usable_for_training": false, "exclusion_tags": ["all_candidates_too_weak"]}
+{"row_id": 95, "best_response": "gspo", "worst_response": "base", "usable_for_training": false, "exclusion_tags": ["all_candidates_too_weak"]}
+{"row_id": 96, "best_response": "base", "worst_response": "gspo", "usable_for_training": false, "exclusion_tags": []}
+{"row_id": 97, "best_response": "base", "worst_response": "gspo", "usable_for_training": false, "exclusion_tags": ["copyright_or_fanfic"]}
+{"row_id": 98, "best_response": "base", "worst_response": "gspo", "usable_for_training": false, "exclusion_tags": []}
+{"row_id": 99, "best_response": "gspo", "worst_response": "base", "usable_for_training": false, "exclusion_tags": ["high_factual_uncertainty", "all_candidates_too_weak"]}
+{"row_id": 100, "best_response": "gspo", "worst_response": "base", "usable_for_training": false, "exclusion_tags": ["all_candidates_too_weak"]}
+{"row_id": 101, "best_response": "gspo", "worst_response": "base", "usable_for_training": true, "exclusion_tags": []}
+{"row_id": 102, "best_response": "base", "worst_response": "gspo", "usable_for_training": false, "exclusion_tags": ["all_candidates_too_weak"]}
+{"row_id": 103, "best_response": "base", "worst_response": "gspo", "usable_for_training": false, "exclusion_tags": []}
+{"row_id": 104, "best_response": "gspo", "worst_response": "base", "usable_for_training": true, "exclusion_tags": []}
+{"row_id": 105, "best_response": "gspo", "worst_response": "base", "usable_for_training": true, "exclusion_tags": []}
+{"row_id": 106, "best_response": "gspo", "worst_response": "base", "usable_for_training": false, "exclusion_tags": []}
+{"row_id": 107, "best_response": "base", "worst_response": "gspo", "usable_for_training": false, "exclusion_tags": []}
+{"row_id": 108, "best_response": "base", "worst_response": "gspo", "usable_for_training": false, "exclusion_tags": []}
+{"row_id": 109, "best_response": "base", "worst_response": "gspo", "usable_for_training": false, "exclusion_tags": ["legal_or_financial_advice", "garbled_or_underspecified_prompt", "all_candidates_too_weak"]}
+{"row_id": 110, "best_response": "gspo", "worst_response": "base", "usable_for_training": false, "exclusion_tags": []}
+{"row_id": 111, "best_response": "gspo", "worst_response": "base", "usable_for_training": false, "exclusion_tags": ["all_candidates_too_weak"]}
+{"row_id": 112, "best_response": "gspo", "worst_response": "base", "usable_for_training": false, "exclusion_tags": ["garbled_or_underspecified_prompt", "all_candidates_too_weak"]}
+{"row_id": 113, "best_response": "gspo", "worst_response": "base", "usable_for_training": true, "exclusion_tags": []}
+{"row_id": 114, "best_response": "gspo", "worst_response": "base", "usable_for_training": false, "exclusion_tags": ["all_candidates_too_weak"]}
+{"row_id": 115, "best_response": "gspo", "worst_response": "base", "usable_for_training": true, "exclusion_tags": []}
+{"row_id": 116, "best_response": "base", "worst_response": "gspo", "usable_for_training": false, "exclusion_tags": ["high_factual_uncertainty", "all_candidates_too_weak"]}
+{"row_id": 117, "best_response": "gspo", "worst_response": "base", "usable_for_training": false, "exclusion_tags": []}
+{"row_id": 118, "best_response": "base", "worst_response": "gspo", "usable_for_training": false, "exclusion_tags": ["all_candidates_too_weak"]}
+{"row_id": 119, "best_response": "gspo", "worst_response": "base", "usable_for_training": false, "exclusion_tags": ["all_candidates_too_weak"]}
+{"row_id": 120, "best_response": "base", "worst_response": "gspo", "usable_for_training": false, "exclusion_tags": []}
+{"row_id": 121, "best_response": "gspo", "worst_response": "base", "usable_for_training": false, "exclusion_tags": []}
+{"row_id": 122, "best_response": "gspo", "worst_response": "base", "usable_for_training": false, "exclusion_tags": []}
+{"row_id": 123, "best_response": "base", "worst_response": "gspo", "usable_for_training": false, "exclusion_tags": []}
+{"row_id": 124, "best_response": "gspo", "worst_response": "base", "usable_for_training": false, "exclusion_tags": ["all_candidates_too_weak"]}
+{"row_id": 125, "best_response": "base", "worst_response": "gspo", "usable_for_training": false, "exclusion_tags": ["all_candidates_too_weak"]}
+{"row_id": 126, "best_response": "base", "worst_response": "gspo", "usable_for_training": false, "exclusion_tags": ["all_candidates_too_weak"]}
+{"row_id": 127, "best_response": "base", "worst_response": "gspo", "usable_for_training": false, "exclusion_tags": ["all_candidates_too_weak"]}

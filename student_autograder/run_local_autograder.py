@@ -6,7 +6,7 @@ import json
 import os
 from pathlib import Path
 
-from common import (
+from student_autograder.common import (
     DEFAULT_JUDGE_MODEL,
     JudgeConfig,
     grade_policy_submission,

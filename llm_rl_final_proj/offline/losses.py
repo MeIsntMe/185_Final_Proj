@@ -7,6 +7,7 @@ import torch
 import torch.nn.functional as F
 
 from llm_rl_final_proj.models.logprobs import compute_per_token_logprobs, masked_mean_per_row
+from llm_rl_final_proj.models.load import PolicyModel
 from llm_rl_final_proj.offline.batch import PreferenceBatch
 from llm_rl_final_proj.utils.peft_utils import disable_adapter_if_possible
 
@@ -26,7 +27,7 @@ class OfflineLossOutput:
 
 
 def compute_policy_and_reference_scores(
-    model: torch.nn.Module,
+    model: PolicyModel,
     batch: PreferenceBatch,
     *,
     need_reference: bool,
@@ -86,7 +87,6 @@ def compute_offline_preference_loss(
 
         # TODO(student): calculate DPO logistic loss.
         losses = -F.logsigmoid(logits)
-
         metrics.update(
             {
                 "preference/reference_margin_sum_mean": float(ref_margin_sum.detach().mean().item()),
@@ -98,6 +98,7 @@ def compute_offline_preference_loss(
         if reference_scores is None:
             raise ValueError("IPO requires reference scores.")
         ref_margin_sum = reference_scores.chosen_logp_sum - reference_scores.rejected_logp_sum
+
         # TODO(student): compute the reference-corrected IPO logits.
         logits = policy_margin_sum - ref_margin_sum
         target_gap = 1.0 / (2.0 * beta)
@@ -122,7 +123,7 @@ def compute_offline_preference_loss(
         rejected_rewards = rejected_rewards[rejected_rewards.argsort()]
         quantile_gap = chosen_rewards - rejected_rewards
         losses = -F.logsigmoid(quantile_gap)
-
+        
         metrics.update(
             {
                 "preference/aot_chosen_reward_mean": float(chosen_rewards.detach().mean().item()),
@@ -131,6 +132,25 @@ def compute_offline_preference_loss(
                 "preference/aot_quantile_accuracy": float((quantile_gap.detach() > 0).float().mean().item()),
             }
         )
+    elif algo == "rf_dpo":
+        # Use mean to reduce the biases
+        margin = policy_margin_mean
+
+        # per token margin. Maybe sweep?
+        target_margin = 0.05
+
+        # Soft margin loss:
+        # low loss when margin > target_margin,
+        # high loss when chosen is not sufficiently above rejected.
+        pref_losses = F.softplus(beta * (target_margin - margin))
+
+        # SFT anchor: makes sure the log prob is less negative, so not a case o high margin but low prob
+        sft_anchor = -policy_scores.chosen_logp_mean
+
+        # maybe sweep?
+        sft_weight = 0.05
+
+        losses = pref_losses + sft_weight * sft_anchor
     else:
         raise ValueError(
             f"Unknown offline preference algo: {algo}. "
@@ -155,7 +175,7 @@ def compute_offline_preference_loss(
     return OfflineLossOutput(loss=weighted_loss, metrics=metrics)
 
 
-def _compute_sequence_scores(model: torch.nn.Module, *, batch: PreferenceBatch, enable_grad: bool) -> SequenceScores:
+def _compute_sequence_scores(model: PolicyModel, *, batch: PreferenceBatch, enable_grad: bool) -> SequenceScores:
     input_ids = torch.cat([batch.chosen_input_ids, batch.rejected_input_ids], dim=0)
     attention_mask = torch.cat([batch.chosen_attention_mask, batch.rejected_attention_mask], dim=0)
     response_mask = torch.cat([batch.chosen_response_mask, batch.rejected_response_mask], dim=0)
