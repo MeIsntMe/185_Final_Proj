@@ -5,16 +5,16 @@ from typing import Dict
 
 import torch
 
-from llm_rl_final_proj_old.rl.base import RLAlgorithm
-from llm_rl_final_proj_old.rollout.rollout_buffer import RolloutBatch, iter_minibatches
+from llm_rl_final_proj.rl.base import RLAlgorithm
+from llm_rl_final_proj.rollout.rollout_buffer import RolloutBatch, iter_minibatches
 
-from llm_rl_final_proj_old.models.logprobs import (
+from llm_rl_final_proj.models.logprobs import (
     approx_kl_from_logprobs,
     compute_per_token_logprobs,
     masked_mean,
     masked_mean_per_row,
 )
-from llm_rl_final_proj_old.utils.torch_utils import clip_grad_norm_
+from llm_rl_final_proj.utils.torch_utils import clip_grad_norm_
 
 
 

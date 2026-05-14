@@ -5,6 +5,9 @@ submissions/
 submissions_old/
 student_autograder_old/
 runs/
+grading/
+
+*.zip
 out/
 out_tmp/
 tmp_autograder_submission/
