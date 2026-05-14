@@ -2,11 +2,6 @@
 
 This repository contains the default LLM RL final project codebase.
 
-The project studies RLHF for open-ended instruction following with:
-- base model: `Qwen/Qwen2.5-1.5B-Instruct`
-- benchmark: a curated `5k`-example dataset built from filtered WildChat prompts and LLM-ranked model-generated answers
-- primary metric: GPT-5.4 head-to-head win rate versus the frozen base model
-
 The main Python package is:
 - `llm_rl_final_proj`
 
