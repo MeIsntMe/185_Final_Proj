@@ -1,3 +1,2 @@
 llm_rl_final_proj
-llm_rl_final_proj_old
 llm_rl_final_proj_public_submission

@@ -7,7 +7,8 @@ student_autograder_old/
 runs/
 grading/
 
-*.zipout/
+*.zip
+out/
 out_tmp/
 tmp_autograder_submission/
 llm_rl_final_proj/__pycache__
