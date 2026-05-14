@@ -27,3 +27,13 @@ Install the Python dependencies with:
 ```bash
 uv pip install -r student_autograder/requirements.txt
 ```
+
+
+$f = "grading/dpo_b025.jsonl"
+
+Copy-Item $f "llm_rl_final_proj_public_submission/part2/offline_best.jsonl" -Force
+Write-Host "===== $(Split-Path $f -Leaf) ====="
+
+uv run python -m student_autograder.run_local_autograder `
+  --submission_dir llm_rl_final_proj_public_submission `
+  --output_json tmp_autograder_results.json
