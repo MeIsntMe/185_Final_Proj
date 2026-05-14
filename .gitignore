@@ -2,7 +2,14 @@ graphs/
 .venv
 wildchat_reward_model/
 submissions/
+submissions_old/
+student_autograder_old/
 runs/
 grading/
 
-*.zip
+*.zipout/
+out_tmp/
+tmp_autograder_submission/
+llm_rl_final_proj/__pycache__
+llm_rl_final_proj_public_submission/
+student_autograder/

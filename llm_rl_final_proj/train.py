@@ -57,6 +57,9 @@ def parse_args() -> TrainConfig:
             "dpo",
             "ipo",
             "aot",
+            "wdpo",   # Added wDPO
+            "apo",    # Added APO
+            "rf_dpo", # Added Reference-Free DPO
         ],
     )
     ap.add_argument("--num_train_epochs", type=float, default=TrainConfig.num_train_epochs)
@@ -73,7 +76,14 @@ def parse_args() -> TrainConfig:
     ap.add_argument("--max_grad_norm", type=float, default=TrainConfig.max_grad_norm)
 
     ap.add_argument("--beta", type=float, default=TrainConfig.beta)
-
+    
+    # Part 2 methods 
+    ap.add_argument("--conf_floor", type=float, default=TrainConfig.conf_floor)
+    ap.add_argument("--apo_lambda_up", type=float, default=TrainConfig.apo_lambda_up)
+    ap.add_argument("--apo_lambda_down", type=float, default=TrainConfig.apo_lambda_down)
+    ap.add_argument("--rf_target_margin", type=float, default=TrainConfig.rf_target_margin)
+    ap.add_argument("--rf_sft_weight", type=float, default=TrainConfig.rf_sft_weight)
+    
     ap.add_argument("--max_prompt_tokens", type=int, default=TrainConfig.max_prompt_tokens)
     ap.add_argument("--max_response_tokens", type=int, default=TrainConfig.max_response_tokens)
 
@@ -280,7 +290,7 @@ def main() -> None:
         step=0,
     )
 
-    need_reference = cfg.algo in {"dpo", "ipo", "aot"}
+    need_reference = cfg.algo in {"dpo", "ipo", "aot", "wdpo", "apo"}
 
     def run_eval(step: int, phase: str) -> Dict[str, float]:
         model.eval()
@@ -362,6 +372,12 @@ def main() -> None:
                 policy_scores=policy_scores,
                 reference_scores=reference_scores,
                 example_weights=None,
+                #additional 
+                conf_floor=cfg.conf_floor,
+                apo_lambda_up=cfg.apo_lambda_up,
+                apo_lambda_down=cfg.apo_lambda_down,
+                rf_target_margin=cfg.rf_target_margin,
+                rf_sft_weight=cfg.rf_sft_weight,
             )
             (loss_out.loss / cfg.grad_accum_steps).backward()
             microbatch_count += 1

@@ -29,6 +29,18 @@ class TrainConfig:
 
     beta: float = 0.1
 
+    # wdpo 
+    conf_floor: float = 0.2 # Sweep: 0.1 / 0.2 / 0.5
+
+    # apo  Sweep: (1.0,1.0) / (1.0,0.5) / (0.5,1.0)
+    apo_lambda_up: float = 1.0
+    apo_lambda_down: float = 1.0
+ 
+    # rf_dpo Sweep: 0.02 / 0.05 / 0.1
+    rf_target_margin: float = 0.05
+    # SFT anchor weight. Sweep: 0.0 / 0.05 / 0.1
+    rf_sft_weight: float = 0.05
+
     max_prompt_tokens: int = 700
     max_response_tokens: int = 512
 

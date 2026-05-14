@@ -49,16 +49,14 @@ def compute_offline_preference_loss(
     policy_scores: SequenceScores,
     reference_scores: SequenceScores | None,
     example_weights: torch.Tensor | None = None,
+    # Part 2 hyperparameters (ignored by Part 1 algorithms)
+    conf_floor: float = 0.2,
+    apo_lambda_up: float = 1.0,
+    apo_lambda_down: float = 1.0,
+    rf_target_margin: float = 0.05,
+    rf_sft_weight: float = 0.05,
 ) -> OfflineLossOutput:
-    """Compute the Part 1 offline preference loss.
-
-    The student starter only includes the required Part 1 algorithms:
-      - dpo
-      - ipo
-      - aot
-
-    Part 2 methods should be added by extending this function.
-    """
+    
     algo = str(algo).strip().lower()
     if beta <= 0.0:
         raise ValueError(f"beta must be > 0, got {beta}")
@@ -76,6 +74,9 @@ def compute_offline_preference_loss(
         "preference/policy_chosen_logp_mean_mean": float(policy_scores.chosen_logp_mean.detach().mean().item()),
         "preference/policy_rejected_logp_mean_mean": float(policy_scores.rejected_logp_mean.detach().mean().item()),
     }
+
+    # Part 1 methods
+    # ------------------------------
 
     if algo == "dpo":
         if reference_scores is None:
@@ -132,25 +133,105 @@ def compute_offline_preference_loss(
                 "preference/aot_quantile_accuracy": float((quantile_gap.detach() > 0).float().mean().item()),
             }
         )
+    
+    # Part 2 methods  
+    # ------------------------------
+
+    elif algo == "wdpo": 
+        # Confidence-Aware Weighted DPO (wdpo)
+        # hyperparameters: conf_floor
+        #         
+        if reference_scores is None:
+            raise ValueError("wdpo requires reference scores.")
+
+        ref_margin_sum = reference_scores.chosen_logp_sum - reference_scores.rejected_logp_sum
+
+        # Standard DPO logits
+        logits = beta * (policy_margin_sum - ref_margin_sum)
+        dpo_losses = -F.logsigmoid(logits)
+
+        # Confidence weights from the reference margin
+        raw_conf = torch.sigmoid(ref_margin_sum.detach())  # no grad through weights
+        # conf_floor passed in via kwarg; see TrainConfig.conf_floor
+        weights = raw_conf.clamp(min=conf_floor)
+
+        # Weighted average (normalise so effective batch size is preserved)
+        losses = dpo_losses * weights / weights.mean().clamp(min=1e-6)
+
+        metrics.update(
+            {
+                "preference/reference_margin_sum_mean": float(ref_margin_sum.detach().mean().item()),
+                "preference/wdpo_logits_mean": float(logits.detach().mean().item()),
+                "preference/wdpo_accuracy": float((logits.detach() > 0).float().mean().item()),
+                "preference/wdpo_conf_mean": float(weights.mean().item()),
+                "preference/wdpo_conf_min": float(weights.min().item()),
+            }
+        )
+
+    elif algo == "apo":
+        # Asymmetric Preference Optimization (apo)
+        # hyperparameters: 
+        #   apo_lambda_up   – weight on the chosen push-up term (default 1.0)
+        #   apo_lambda_down – weight on the rejected push-down term (default 1.0)
+        #                     sweep: (1.0,1.0) / (1.0,0.5) / (0.5,1.0)
+        if reference_scores is None:
+            raise ValueError("apo requires reference scores.")
+
+        # Per-side reference-corrected rewards (no margin – independent terms)
+        chosen_reward  = beta * (policy_scores.chosen_logp_sum  - reference_scores.chosen_logp_sum)
+        rejected_reward = beta * (policy_scores.rejected_logp_sum - reference_scores.rejected_logp_sum)
+
+        # Push up chosen: reward should be positive (above reference)
+        loss_up   = -F.logsigmoid(chosen_reward)
+
+        # Push down rejected: penalise when rejected reward is above the reference.
+        # -log σ(-x) = log(1 + e^x), which is large when x > 0 (rejected above ref).
+        loss_down = -F.logsigmoid(-rejected_reward)
+
+        # apo_lambda_up / apo_lambda_down passed in via kwargs; see TrainConfig
+        losses = apo_lambda_up * loss_up + apo_lambda_down * loss_down
+
+        metrics.update(
+            {
+                "preference/apo_chosen_reward_mean":   float(chosen_reward.detach().mean().item()),
+                "preference/apo_rejected_reward_mean": float(rejected_reward.detach().mean().item()),
+                "preference/apo_loss_up_mean":         float(loss_up.detach().mean().item()),
+                "preference/apo_loss_down_mean":       float(loss_down.detach().mean().item()),
+                "preference/apo_chosen_accuracy":      float((chosen_reward.detach() > 0).float().mean().item()),
+                "preference/apo_rejected_accuracy":    float((rejected_reward.detach() < 0).float().mean().item()),
+            }
+        )
+
     elif algo == "rf_dpo":
-        # Use mean to reduce the biases
+        # Reference-Free DPO 
+        # hyperparameters 
+        #   rf_target_margin – desired per-token margin (default 0.05)
+        #                      sweep: 0.02 / 0.05 / 0.1
+        #   rf_sft_weight    – SFT anchor coefficient   (default 0.05)
+        #                      sweep: 0.0 / 0.05 / 0.1
+        # ----------------------------------------------------------------
+        # rf_target_margin / rf_sft_weight passed in via kwargs; see TrainConfig
+
+        # Use mean log-probs to remove length bias
         margin = policy_margin_mean
 
-        # per token margin. Maybe sweep?
-        target_margin = 0.05
+        # Soft hinge: zero loss once margin exceeds target, grows for margin < target
+        pref_losses = F.softplus(beta * (rf_target_margin - margin))
 
-        # Soft margin loss:
-        # low loss when margin > target_margin,
-        # high loss when chosen is not sufficiently above rejected.
-        pref_losses = F.softplus(beta * (target_margin - margin))
-
-        # SFT anchor: makes sure the log prob is less negative, so not a case o high margin but low prob
+        # SFT anchor: prevents margin inflation via chosen-logp collapse
         sft_anchor = -policy_scores.chosen_logp_mean
 
-        # maybe sweep?
-        sft_weight = 0.05
+        losses = pref_losses + rf_sft_weight * sft_anchor
 
-        losses = pref_losses + sft_weight * sft_anchor
+        metrics.update(
+            {
+                "preference/rf_dpo_margin_mean":   float(margin.detach().mean().item()),
+                "preference/rf_dpo_pref_loss_mean": float(pref_losses.detach().mean().item()),
+                "preference/rf_dpo_sft_mean":       float(sft_anchor.detach().mean().item()),
+                "preference/rf_dpo_accuracy":       float((margin.detach() > rf_target_margin).float().mean().item()),
+            }
+        )
+
     else:
         raise ValueError(
             f"Unknown offline preference algo: {algo}. "
