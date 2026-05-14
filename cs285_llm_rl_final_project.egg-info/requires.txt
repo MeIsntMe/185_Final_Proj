@@ -1,4 +1,9 @@
+accelerate>=1.12.0
+datasets>=4.6.1
 modal>=1.0.0
+peft>=0.18.1
+torch>=2.6.0
+transformers>=4.56.2
 
 [remote]
 torch<2.7,>=2.5

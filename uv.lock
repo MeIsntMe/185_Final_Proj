@@ -198,7 +198,12 @@ name = "cs285-llm-rl-final-project"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [
+    { name = "accelerate" },
+    { name = "datasets" },
     { name = "modal" },
+    { name = "peft" },
+    { name = "torch" },
+    { name = "transformers" },
 ]
 
 [package.optional-dependencies]
@@ -214,12 +219,17 @@ remote = [
 
 [package.metadata]
 requires-dist = [
+    { name = "accelerate", specifier = ">=1.12.0" },
+    { name = "datasets", specifier = ">=4.6.1" },
     { name = "datasets", marker = "extra == 'remote'", specifier = ">=2.19.0" },
     { name = "modal", specifier = ">=1.0.0" },
     { name = "numpy", marker = "extra == 'remote'", specifier = "<2.0" },
+    { name = "peft", specifier = ">=0.18.1" },
     { name = "peft", marker = "extra == 'remote'", specifier = ">=0.13.0" },
+    { name = "torch", specifier = ">=2.6.0" },
     { name = "torch", marker = "extra == 'remote'", specifier = ">=2.5,<2.7" },
     { name = "tqdm", marker = "extra == 'remote'", specifier = ">=4.66.0" },
+    { name = "transformers", specifier = ">=4.56.2" },
     { name = "transformers", marker = "extra == 'remote'", specifier = ">=4.45.0,<4.57.0" },
     { name = "wandb", marker = "extra == 'remote'", specifier = ">=0.16.0" },
 ]
